@@ -1,3 +1,8 @@
+#![allow(non_snake_case)]
+#![allow(dead_code)]
+
+mod token;
+
 #[cfg(test)]
 mod tests {
     #[test]

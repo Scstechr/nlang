@@ -1,12 +1,20 @@
 #![allow(non_snake_case)]
 #![allow(dead_code)]
+#![allow(unused_imports)]
 
-mod token;
+pub mod lexer;
+pub mod token;
+
+use token::TokenType;
 
 #[cfg(test)]
 mod tests {
+
     #[test]
-    fn it_works() {
-        assert_eq!(2 + 2, 4);
+    fn lexer_test() {
+        // let expected_type = TokenType;
+        // println!("{:?}", expected_type);
+        let input = "=+(){},;";
+        assert_eq!(input, "=+(){},;");
     }
 }

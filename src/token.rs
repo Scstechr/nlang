@@ -1,9 +1,9 @@
 #![allow(non_snake_case)]
 #![allow(dead_code)]
 
-type TokenType = String;
+pub type TokenType = String;
 
-struct Token {
+pub struct Token {
     Type: TokenType,
     Literal: String,
 }

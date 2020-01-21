@@ -5,31 +5,31 @@ pub type TokenType = String;
 
 #[derive(Debug)]
 pub struct Token {
-    Type: TokenType,
-    Literal: String,
+    pub Type: TokenType,
+    pub Literal: String,
 }
 
-const ILLEGAL: &str = "ILLEGAL";
-const EOF: &str = "EOF";
+pub const ILLEGAL: &str = "ILLEGAL";
+pub const EOF: &str = "EOF";
 
 // Identifier and Literal
-const IDENT: &str = "IDENT"; // add, foobar, x, y, ...
-const INT: &str = "INT";
+pub const IDENT: &str = "IDENT"; // add, foobar, x, y, ...
+pub const INT: &str = "INT";
 
 // Operator
-const ASSIGN: &str = "=";
-const PLUS: &str = "+";
+pub const ASSIGN: &str = "=";
+pub const PLUS: &str = "+";
 
 // Deliminator
-const COMMA: &str = ",";
-const SEMICOLON: &str = ";";
+pub const COMMA: &str = ",";
+pub const SEMICOLON: &str = ";";
 
 // Prances and Braces
-const LPAREN: &str = "(";
-const RPAREN: &str = ")";
-const LBRACE: &str = "{";
-const RBRACE: &str = "}";
+pub const LPAREN: &str = "(";
+pub const RPAREN: &str = ")";
+pub const LBRACE: &str = "{";
+pub const RBRACE: &str = "}";
 
 // Keywords
-const FUNCTION: &str = "FUNCTION";
-const LET: &str = "LET";
+pub const FUNCTION: &str = "FUNCTION";
+pub const LET: &str = "LET";

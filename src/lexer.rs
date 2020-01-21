@@ -33,4 +33,26 @@ impl Lexer {
         self.position = self.read_position;
         self.read_position += 1;
     }
+
+    fn next_token(&mut self) -> token::Token {
+        let tok = {
+            if self.ch == b'=' {
+                new_token(token::ASSIGN, self.ch)
+            } else {
+                token::Token {
+                    Type: token::EOF.to_string(),
+                    Literal: "".to_string(),
+                }
+            }
+        };
+        self.read_char();
+        return tok;
+    }
+}
+
+fn new_token(tokenType: &'static str, ch: u8) -> token::Token {
+    token::Token {
+        Type: tokenType.to_string(),
+        Literal: ch.to_string(),
+    }
 }

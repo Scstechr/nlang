@@ -93,7 +93,10 @@ let result = add(five, ten);
         for (_, t) in tests.iter().enumerate() {
             let tok = l.next_token();
             // println!("{:#?}", tok.Literal);
-            println!("{:#?},{:#?}", tok.Literal, t.Literal);
+            println!(
+                "tok: [{:#?}:{:#?}]\x1b[30Gt: [{:#?}:{:#?}]",
+                tok.Type, tok.Literal, t.Type, t.Literal
+            );
             //     assert_eq!(tok.Type, t.Type);
             //     assert_eq!(tok.Literal, t.Literal);
         }

@@ -62,13 +62,19 @@ impl Lexer {
             _ => {
                 if self.ch > 0 {
                     if is_letter(&self.ch) {
+                        let literal = self.read_identifier();
+                        let t = match literal.as_str() {
+                            "fn" => token::FUNCTION.to_string(),
+                            "let" => token::LET.to_string(),
+                            _ => token::ID.to_string(),
+                        };
                         return token::Token {
-                            Type: "MISC".to_string(),
-                            Literal: self.read_identifier(),
+                            Type: t,
+                            Literal: literal,
                         };
                     } else if is_digit(&self.ch) {
                         return token::Token {
-                            Type: "INT".to_string(),
+                            Type: token::INT.to_string(),
                             Literal: self.read_number(),
                         };
                     } else {

@@ -72,6 +72,11 @@ impl Lexer {
                         let t = match literal.as_str() {
                             "fn" => token::FUNCTION.to_string(),
                             "let" => token::LET.to_string(),
+                            "if" => token::IF.to_string(),
+                            "else" => token::ELSE.to_string(),
+                            "true" => token::TRUE.to_string(),
+                            "false" => token::FALSE.to_string(),
+                            "return" => token::RETURN.to_string(),
                             _ => token::ID.to_string(),
                         };
                         return token::Token {

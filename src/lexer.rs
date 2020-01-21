@@ -4,6 +4,7 @@
 
 use crate::token;
 
+#[derive(Debug)]
 pub struct Lexer {
     input: String,
     position: usize,
@@ -13,21 +14,23 @@ pub struct Lexer {
 
 impl Lexer {
     fn new(input: String) -> Lexer {
-        Lexer {
+        let mut l = Lexer {
             input: input,
             position: 0,
             read_position: 0,
             ch: 0,
-        }
+        };
+        l.read_char();
+        return l;
     }
 
-    fn read_char(l: &mut Lexer) {
-        if l.read_position >= l.input.len() {
-            l.ch = 0;
+    fn read_char(&mut self) {
+        if self.read_position >= self.input.len() {
+            self.ch = 0;
         } else {
-            l.ch = l.input.as_bytes()[l.read_position];
+            self.ch = self.input.as_bytes()[self.read_position];
         }
-        l.position = l.read_position;
-        l.read_position += 1;
+        self.position = self.read_position;
+        self.read_position += 1;
     }
 }

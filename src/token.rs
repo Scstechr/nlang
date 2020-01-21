@@ -6,7 +6,7 @@ pub type TokenType = String;
 #[derive(Debug)]
 pub struct Token {
     pub Type: TokenType,
-    pub Literal: String,
+    pub Literal: u8,
 }
 
 pub const ILLEGAL: &str = "ILLEGAL";

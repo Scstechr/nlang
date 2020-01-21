@@ -23,7 +23,7 @@ impl Lexer {
         self.read_position += 1;
     }
 
-    fn next_token(&mut self) -> token::Token {
+    pub fn next_token(&mut self) -> token::Token {
         let tok: token::Token = match self.ch {
             b'=' => new_token(token::ASSIGN, self.ch),
             b'+' => new_token(token::PLUS, self.ch),
@@ -35,7 +35,7 @@ impl Lexer {
             b'}' => new_token(token::RBRACE, self.ch),
             _ => token::Token {
                 Type: token::EOF.to_string(),
-                Literal: "".to_string(),
+                Literal: 0,
             },
         };
         self.read_char();
@@ -57,6 +57,6 @@ pub fn new(input: &str) -> Lexer {
 pub fn new_token(tokenType: &'static str, ch: u8) -> token::Token {
     token::Token {
         Type: tokenType.to_string(),
-        Literal: ch.to_string(),
+        Literal: ch,
     }
 }

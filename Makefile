@@ -3,4 +3,5 @@ main:
 	cargo build --release
 
 test:
+	cargo fmt
 	cargo test -- --nocapture

@@ -48,7 +48,7 @@ let add_ = fn(x, y) {
 };
 
 let result = add(five, ten);
-five * ten / 10 - 1 < >;
+five * ten / 10 - 1 < > != 4;
 ";
         let tests = vec![
             lexer::new_token(token::LET, "let".as_bytes()),
@@ -96,6 +96,9 @@ five * ten / 10 - 1 < >;
             lexer::new_token(token::INT, "1".as_bytes()),
             lexer::new_token(token::LT, "<".as_bytes()),
             lexer::new_token(token::GT, ">".as_bytes()),
+            lexer::new_token(token::BANG, "!".as_bytes()),
+            lexer::new_token(token::ASSIGN, "=".as_bytes()),
+            lexer::new_token(token::INT, "4".as_bytes()),
             lexer::new_token(token::SEMICOLON, ";".as_bytes()),
             lexer::new_token(token::EOF, "".as_bytes()),
         ];

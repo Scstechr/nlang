@@ -5,16 +5,20 @@
 pub mod lexer;
 pub mod token;
 
-use token::TokenType;
+// use lexer::Lexer;
+// use token::Token;
+// use token::TokenType;
 
 #[cfg(test)]
 mod tests {
 
     #[test]
     fn lexer_test() {
+        use crate::lexer;
         // let expected_type = TokenType;
         // println!("{:?}", expected_type);
         let input = "=+(){},;";
+        let l = lexer::new(input);
         assert_eq!(input, "=+(){},;");
     }
 }

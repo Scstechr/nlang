@@ -38,6 +38,20 @@ impl Lexer {
         let tok = {
             if self.ch == b'=' {
                 new_token(token::ASSIGN, self.ch)
+            } else if self.ch == b'+' {
+                new_token(token::PLUS, self.ch)
+            } else if self.ch == b',' {
+                new_token(token::COMMA, self.ch)
+            } else if self.ch == b';' {
+                new_token(token::SEMICOLON, self.ch)
+            } else if self.ch == b'(' {
+                new_token(token::LPAREN, self.ch)
+            } else if self.ch == b')' {
+                new_token(token::RPAREN, self.ch)
+            } else if self.ch == b'{' {
+                new_token(token::LBRACE, self.ch)
+            } else if self.ch == b'}' {
+                new_token(token::RBRACE, self.ch)
             } else {
                 token::Token {
                     Type: token::EOF.to_string(),

@@ -21,7 +21,7 @@ pub const ASSIGN: &str = "=";
 pub const PLUS: &str = "+";
 pub const MINUS: &str = "-";
 pub const BANG: &str = "!";
-pub const ASTERISK: &str = "*";
+pub const AST: &str = "*";
 pub const SLASH: &str = "/";
 
 pub const LT: &str = "<";

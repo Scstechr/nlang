@@ -53,6 +53,12 @@ impl Lexer {
         let tok: token::Token = match self.ch {
             b'=' => new_token(token::ASSIGN, &[self.ch]),
             b'+' => new_token(token::PLUS, &[self.ch]),
+            b'-' => new_token(token::MINUS, &[self.ch]),
+            b'!' => new_token(token::BANG, &[self.ch]),
+            b'*' => new_token(token::AST, &[self.ch]),
+            b'/' => new_token(token::SLASH, &[self.ch]),
+            b'<' => new_token(token::LT, &[self.ch]),
+            b'>' => new_token(token::GT, &[self.ch]),
             b',' => new_token(token::COMMA, &[self.ch]),
             b';' => new_token(token::SEMICOLON, &[self.ch]),
             b'(' => new_token(token::LPAREN, &[self.ch]),

@@ -5,10 +5,6 @@
 pub mod lexer;
 pub mod token;
 
-// use lexer::Lexer;
-// use token::Token;
-// use token::TokenType;
-
 #[cfg(test)]
 mod tests {
 
@@ -16,6 +12,10 @@ mod tests {
     fn lexer_test() {
         println!("# lexer_test");
         use crate::lexer;
+        use crate::token;
+        use std::collections::HashMap;
+
+        let mut tests: Vec<HashMap<token::TokenType, String>> = Vec::new();
         // let expected_type = TokenType;
         // println!("{:?}", expected_type);
         let input = "=+(){},;";

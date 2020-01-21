@@ -14,11 +14,13 @@ mod tests {
 
     #[test]
     fn lexer_test() {
+        println!("# lexer_test");
         use crate::lexer;
         // let expected_type = TokenType;
         // println!("{:?}", expected_type);
         let input = "=+(){},;";
         let l = lexer::new(input);
+        println!("{:?}", l);
         assert_eq!(input, "=+(){},;");
     }
 }

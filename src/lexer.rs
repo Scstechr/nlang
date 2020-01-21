@@ -23,11 +23,33 @@ impl Lexer {
         self.read_position += 1;
     }
 
-    fn read_identifier(&self) -> String {
-        "Hello".to_string()
+    fn read_identifier(&mut self) -> String {
+        let position = self.position;
+        while is_letter(&self.ch) {
+            self.read_char();
+        }
+        self.input.get(position..self.position).unwrap().to_string()
+    }
+
+    fn read_number(&mut self) -> String {
+        let position = self.position;
+        while is_digit(&self.ch) {
+            self.read_char();
+        }
+        self.input.get(position..self.position).unwrap().to_string()
     }
 
     pub fn next_token(&mut self) -> token::Token {
+        let mut flag = true;
+        while flag {
+            let c = char::from(self.ch);
+            if c.is_whitespace() {
+                self.read_char();
+            } else {
+                flag = false;
+            }
+        }
+
         let tok: token::Token = match self.ch {
             b'=' => new_token(token::ASSIGN, &[self.ch]),
             b'+' => new_token(token::PLUS, &[self.ch]),
@@ -39,11 +61,16 @@ impl Lexer {
             b'}' => new_token(token::RBRACE, &[self.ch]),
             _ => {
                 if self.ch > 0 {
-                    if self.ch.is_ascii() {
-                        token::Token {
+                    if is_letter(&self.ch) {
+                        return token::Token {
                             Type: "MISC".to_string(),
                             Literal: self.read_identifier(),
-                        }
+                        };
+                    } else if is_digit(&self.ch) {
+                        return token::Token {
+                            Type: "INT".to_string(),
+                            Literal: self.read_number(),
+                        };
                     } else {
                         new_token(token::ILLEGAL, &[self.ch])
                     }
@@ -55,9 +82,7 @@ impl Lexer {
                 }
             }
         };
-        if tok.Literal.len() == 1 {
-            self.read_char();
-        }
+        self.read_char();
         return tok;
     }
 }
@@ -79,4 +104,14 @@ pub fn new_token(tokenType: &'static str, ch: &[u8]) -> token::Token {
         Type: tokenType.to_string(),
         Literal: converted,
     }
+}
+
+fn is_letter(ch: &u8) -> bool {
+    let c = char::from(*ch);
+    c.is_alphabetic() || c == '_'
+}
+
+fn is_digit(ch: &u8) -> bool {
+    let c = char::from(*ch);
+    c.is_digit(10)
 }

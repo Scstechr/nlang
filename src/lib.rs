@@ -43,7 +43,7 @@ mod tests {
         let input = "let five = 5;
 let ten = 10;
 
-let add = fn(x, y) {
+let add_ = fn(x, y) {
     x + y;
 };
 
@@ -61,7 +61,7 @@ let result = add(five, ten);
             lexer::new_token(token::INT, "10".as_bytes()),
             lexer::new_token(token::SEMICOLON, ";".as_bytes()),
             lexer::new_token(token::LET, "let".as_bytes()),
-            lexer::new_token(token::ID, "add".as_bytes()),
+            lexer::new_token(token::ID, "add_".as_bytes()),
             lexer::new_token(token::ASSIGN, "=".as_bytes()),
             lexer::new_token(token::FUNCTION, "fn".as_bytes()),
             lexer::new_token(token::LPAREN, "(".as_bytes()),
@@ -90,10 +90,12 @@ let result = add(five, ten);
         ];
         let mut l = lexer::new(input);
         println!("{:#?}", l);
-        // for (_, t) in tests.iter().enumerate() {
-        //     let tok = l.next_token();
-        //     assert_eq!(tok.Type, t.Type);
-        //     assert_eq!(tok.Literal, t.Literal);
-        // }
+        for (_, t) in tests.iter().enumerate() {
+            let tok = l.next_token();
+            // println!("{:#?}", tok.Literal);
+            println!("{:#?},{:#?}", tok.Literal, t.Literal);
+            //     assert_eq!(tok.Type, t.Type);
+            //     assert_eq!(tok.Literal, t.Literal);
+        }
     }
 }

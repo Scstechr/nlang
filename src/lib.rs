@@ -89,16 +89,16 @@ let result = add(five, ten);
             lexer::new_token(token::EOF, "".as_bytes()),
         ];
         let mut l = lexer::new(input);
-        println!("{:#?}", l);
+        // println!("{:#?}", l);
         for (_, t) in tests.iter().enumerate() {
             let tok = l.next_token();
-            // println!("{:#?}", tok.Literal);
-            println!(
-                "tok: [{:#?}:{:#?}]\x1b[30Gt: [{:#?}:{:#?}]",
-                tok.Type, tok.Literal, t.Type, t.Literal
-            );
-            //     assert_eq!(tok.Type, t.Type);
-            //     assert_eq!(tok.Literal, t.Literal);
+            // // println!("{:#?}", tok.Literal);
+            // println!(
+            //     "tok: [{:#?}:{:#?}]\x1b[30Gt: [{:#?}:{:#?}]",
+            //     tok.Type, tok.Literal, t.Type, t.Literal
+            // );
+            assert_eq!(tok.Type, t.Type);
+            assert_eq!(tok.Literal, t.Literal);
         }
     }
 }

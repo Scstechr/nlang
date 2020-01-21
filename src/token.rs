@@ -13,7 +13,7 @@ pub const ILLEGAL: &str = "ILLEGAL";
 pub const EOF: &str = "EOF";
 
 // Identifier and Literal
-pub const ID: &str = "IDENT"; // add, foobar, x, y, ...
+pub const ID: &str = "ID"; // add, foobar, x, y, ...
 pub const INT: &str = "INT";
 
 // Operator

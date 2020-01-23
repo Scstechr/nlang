@@ -3,6 +3,7 @@
 #![allow(unused_imports)]
 
 pub mod lexer;
+pub mod repl;
 pub mod token;
 
 #[cfg(test)]

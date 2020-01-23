@@ -42,10 +42,10 @@ pub const LBRACE: &str = "{";
 pub const RBRACE: &str = "}";
 
 // Keywords
-pub const FUNCTION: &str = "FUNCTION";
-pub const LET: &str = "LET";
-pub const IF: &str = "IF";
-pub const ELSE: &str = "ELSE";
-pub const TRUE: &str = "TRUE";
-pub const FALSE: &str = "FALSE";
-pub const RETURN: &str = "RETURN";
+pub const FUNCTION: &str = "fn";
+pub const LET: &str = "let";
+pub const IF: &str = "if";
+pub const ELSE: &str = "else";
+pub const TRUE: &str = "true";
+pub const FALSE: &str = "false";
+pub const RETURN: &str = "return";

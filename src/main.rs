@@ -1,7 +1,8 @@
 extern crate nlang;
 
-use nlang::{lexer, token};
+use nlang::repl;
 
 fn main() {
-    println!("Hello World!");
+    println!("REPL of N-Programming Language");
+    repl::start();
 }

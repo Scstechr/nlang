@@ -143,7 +143,7 @@ let {
         // println!("{:#?}", l);
         for (_, t) in tests.iter().enumerate() {
             let tok = l.next_token();
-            // // println!("{:#?}", tok.Literal);
+            // println!("{:#?}", tok.Literal);
             // println!(
             //     "tok: [{:#?}:{:#?}]\x1b[30Gt: [{:#?}:{:#?}]",
             //     tok.Type, tok.Literal, t.Type, t.Literal

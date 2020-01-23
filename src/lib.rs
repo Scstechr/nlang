@@ -160,8 +160,8 @@ let {
         use std::collections::HashMap;
 
         let input = "if a {
-    != b { c },
-    == d { e },
+    != b { >= c },
+    == d { <= e },
 };";
         let tests = vec![
             // if a {
@@ -172,6 +172,7 @@ let {
             lexer::new_token(token::NEQ, "!=".as_bytes()),
             lexer::new_token(token::ID, "b".as_bytes()),
             lexer::new_token(token::LBRACE, "{".as_bytes()),
+            lexer::new_token(token::GEQ, ">=".as_bytes()),
             lexer::new_token(token::ID, "c".as_bytes()),
             lexer::new_token(token::RBRACE, "}".as_bytes()),
             lexer::new_token(token::COMMA, ",".as_bytes()),
@@ -179,6 +180,7 @@ let {
             lexer::new_token(token::EQ, "==".as_bytes()),
             lexer::new_token(token::ID, "d".as_bytes()),
             lexer::new_token(token::LBRACE, "{".as_bytes()),
+            lexer::new_token(token::LEQ, "<=".as_bytes()),
             lexer::new_token(token::ID, "e".as_bytes()),
             lexer::new_token(token::RBRACE, "}".as_bytes()),
             lexer::new_token(token::COMMA, ",".as_bytes()),

@@ -81,8 +81,24 @@ impl Lexer {
             }
             b'*' => new_token(token::AST, &[self.ch]),
             b'/' => new_token(token::SLASH, &[self.ch]),
-            b'<' => new_token(token::LT, &[self.ch]),
-            b'>' => new_token(token::GT, &[self.ch]),
+            b'<' => {
+                if self.peek_char() == '=' {
+                    let ch = self.ch;
+                    self.read_char();
+                    new_token(token::LEQ, &[ch, self.ch])
+                } else {
+                    new_token(token::LT, &[self.ch])
+                }
+            }
+            b'>' => {
+                if self.peek_char() == '=' {
+                    let ch = self.ch;
+                    self.read_char();
+                    new_token(token::GEQ, &[ch, self.ch])
+                } else {
+                    new_token(token::GT, &[self.ch])
+                }
+            }
             b',' => new_token(token::COMMA, &[self.ch]),
             b';' => new_token(token::SEMICOLON, &[self.ch]),
             b'(' => new_token(token::LPAREN, &[self.ch]),

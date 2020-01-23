@@ -28,6 +28,8 @@ pub const NEQ: &str = "!=";
 
 pub const LT: &str = "<";
 pub const GT: &str = ">";
+pub const GEQ: &str = ">=";
+pub const LEQ: &str = "<=";
 
 // Deliminator
 pub const COMMA: &str = ",";

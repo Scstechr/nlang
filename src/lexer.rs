@@ -39,6 +39,14 @@ impl Lexer {
         self.input.get(position..self.position).unwrap().to_string()
     }
 
+    fn peek_char(&self) -> char {
+        if self.read_position >= self.input.len() {
+            char::from(0)
+        } else {
+            char::from(self.input.as_bytes()[self.position + 1])
+        }
+    }
+
     pub fn next_token(&mut self) -> token::Token {
         let mut flag = true;
         while flag {
@@ -51,10 +59,26 @@ impl Lexer {
         }
 
         let tok: token::Token = match self.ch {
-            b'=' => new_token(token::ASSIGN, &[self.ch]),
+            b'=' => {
+                if self.peek_char() == '=' {
+                    let ch = self.ch;
+                    self.read_char();
+                    new_token(token::EQ, &[ch, self.ch])
+                } else {
+                    new_token(token::ASSIGN, &[self.ch])
+                }
+            }
             b'+' => new_token(token::PLUS, &[self.ch]),
             b'-' => new_token(token::MINUS, &[self.ch]),
-            b'!' => new_token(token::BANG, &[self.ch]),
+            b'!' => {
+                if self.peek_char() == '=' {
+                    let ch = self.ch;
+                    self.read_char();
+                    new_token(token::NEQ, &[ch, self.ch])
+                } else {
+                    new_token(token::BANG, &[self.ch])
+                }
+            }
             b'*' => new_token(token::AST, &[self.ch]),
             b'/' => new_token(token::SLASH, &[self.ch]),
             b'<' => new_token(token::LT, &[self.ch]),

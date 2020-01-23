@@ -23,6 +23,8 @@ pub const MINUS: &str = "-";
 pub const BANG: &str = "!";
 pub const AST: &str = "*";
 pub const SLASH: &str = "/";
+pub const EQ: &str = "==";
+pub const NEQ: &str = "!=";
 
 pub const LT: &str = "<";
 pub const GT: &str = ">";

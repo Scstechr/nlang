@@ -152,4 +152,52 @@ let {
             assert_eq!(tok.Literal, t.Literal);
         }
     }
+
+    #[test]
+    fn lexer_eq_test() {
+        use crate::lexer;
+        use crate::token;
+        use std::collections::HashMap;
+
+        let input = "if a {
+    != b { c },
+    == d { e },
+};";
+        let tests = vec![
+            // if a {
+            lexer::new_token(token::IF, "if".as_bytes()),
+            lexer::new_token(token::ID, "a".as_bytes()),
+            lexer::new_token(token::LBRACE, "{".as_bytes()),
+            // != b { c },
+            lexer::new_token(token::NEQ, "!=".as_bytes()),
+            lexer::new_token(token::ID, "b".as_bytes()),
+            lexer::new_token(token::LBRACE, "{".as_bytes()),
+            lexer::new_token(token::ID, "c".as_bytes()),
+            lexer::new_token(token::RBRACE, "}".as_bytes()),
+            lexer::new_token(token::COMMA, ",".as_bytes()),
+            // } else {
+            lexer::new_token(token::EQ, "==".as_bytes()),
+            lexer::new_token(token::ID, "d".as_bytes()),
+            lexer::new_token(token::LBRACE, "{".as_bytes()),
+            lexer::new_token(token::ID, "e".as_bytes()),
+            lexer::new_token(token::RBRACE, "}".as_bytes()),
+            lexer::new_token(token::COMMA, ",".as_bytes()),
+            // return true;
+            lexer::new_token(token::RBRACE, "}".as_bytes()),
+            lexer::new_token(token::SEMICOLON, ";".as_bytes()),
+            lexer::new_token(token::EOF, "".as_bytes()),
+        ];
+        let mut l = lexer::new(input);
+        // println!("{:#?}", l);
+        for (_, t) in tests.iter().enumerate() {
+            let tok = l.next_token();
+            // println!("{:#?}", tok.Literal);
+            // println!(
+            //     "tok: [{:#?}:{:#?}]\x1b[30Gt: [{:#?}:{:#?}]",
+            //     tok.Type, tok.Literal, t.Type, t.Literal
+            // );
+            assert_eq!(tok.Type, t.Type);
+            assert_eq!(tok.Literal, t.Literal);
+        }
+    }
 }

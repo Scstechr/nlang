@@ -13,7 +13,6 @@ mod tests {
     fn lexer_simple_test() {
         use crate::lexer;
         use crate::token;
-        use std::collections::HashMap;
 
         let input = "=+(){},;";
         let tests = vec![
@@ -28,7 +27,7 @@ mod tests {
             lexer::new_token(token::EOF, "".as_bytes()),
         ];
         let mut l = lexer::new(input);
-        for (_, t) in tests.iter().enumerate() {
+        for t in tests.iter() {
             let tok = l.next_token();
             assert_eq!(tok.Type, t.Type);
             assert_eq!(tok.Literal, t.Literal);

@@ -20,7 +20,7 @@ fn parser_test_let_statements() {
 }
 
 fn parser_test_let_statement(s: &Statement, t: &str) {
-    // println!("{:?}", s);
+    println!("{:?}", s);
     assert_eq!("let", s.token_literal());
     assert_eq!(t, s.Name.Value);
     assert_eq!(t, s.Name.token_literal());
@@ -37,4 +37,27 @@ fn check_parser_errors(p: &parser::Parser) {
         }
         panic!("exit due to parsing error...");
     }
+}
+
+#[test]
+fn parser_test_return_statements() {
+    let input = "return 5;
+    return 10;
+    return 993322;";
+    let l = lexer::new(input);
+    let mut p = parser::Parser::new(l);
+    let program = p.parse_program();
+    check_parser_errors(&p);
+    let tests = vec!["x", "y", "foobar"];
+    // assert_eq!(3, program.Statements.len());
+    for (stmt, t) in program.Statements.iter().zip(tests) {
+        parser_test_return_statement(&stmt, &t);
+    }
+}
+
+fn parser_test_return_statement(s: &Statement, t: &str) {
+    println!("{:?}", s);
+    assert_eq!("return", s.token_literal());
+    // assert_eq!(t, s.Name.Value);
+    // assert_eq!(t, s.Name.token_literal());
 }

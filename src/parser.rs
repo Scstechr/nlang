@@ -15,7 +15,11 @@ impl Parser {
         self.peek_token = self.l.next_token();
     }
 
-    fn expect_peek(&self, t: &token::TokenType) -> bool {
+    fn expect_peek(&self, token_type: &'static str) -> bool {
+        true
+    }
+
+    fn cur_token_is(&self, token_type: &'static str) -> bool {
         true
     }
 
@@ -42,13 +46,17 @@ impl Parser {
             Name: ast::empty_identifier(),
             Value: ast::Expression {},
         };
-        if !self.expect_peek(&token::ID.to_string()) {
+        if !self.expect_peek(token::ID) {
             return ptr::null();
         }
         stmt.Name = &mut ast::Identifier {
             Token: self.cur_token.clone(),
             Value: self.cur_token.Literal.clone(),
         };
+        if !self.expect_peek(token::ASSIGN) {
+            return ptr::null();
+        }
+        while !self.cur_token_is(token::SEMICOLON) {}
         &ast::empty_statement()
     }
 }

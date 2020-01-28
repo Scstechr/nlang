@@ -15,12 +15,12 @@ impl Parser {
         self.peek_token = self.l.next_token();
     }
 
-    fn expect_peek(&self, token_type: &'static str) -> bool {
+    fn expect_peek(&self, t: &'static str) -> bool {
         true
     }
 
-    fn cur_token_is(&self, token_type: &'static str) -> bool {
-        true
+    fn cur_token_is(&self, t: &'static str) -> bool {
+        self.peek_token.Type == t
     }
 
     fn parse_statement(&self) -> ast::Statement {

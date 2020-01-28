@@ -3,7 +3,7 @@
 
 pub type TokenType = String;
 
-#[derive(Debug)]
+#[derive(Clone, Debug)]
 pub struct Token {
     pub Type: TokenType,
     pub Literal: String,

@@ -1,15 +1,20 @@
 use crate::token;
 
-pub struct Expression {
-}
+pub struct Expression {}
 
-pub struct Identifier {
-}
+pub struct Identifier {}
 
-pub struct Statement {
+pub struct LetStatement {
     Token: token::Token,
     Name: Identifier,
     Value: Expression,
+}
+
+impl LetStatement {
+    fn statementNode(&self) {}
+    fn TokenLiteral(&self) -> &String {
+        &self.Token.Literal
+    }
 }
 // pub trait Node {
 //     fn token_literal() -> String;
@@ -25,5 +30,3 @@ pub struct Statement {
 // pub struct Program {
 //     Statement: Vec<Statement>,
 // }
-
-

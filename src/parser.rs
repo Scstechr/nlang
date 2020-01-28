@@ -33,14 +33,7 @@ impl Parser {
 
     fn parse_statement(&mut self) -> (ast::Statement, bool) {
         match &self.cur_token.Type as &str {
-            token::LET => {
-                let (stmt, f) = self.parse_let_statement();
-                if f {
-                    return (stmt, true);
-                } else {
-                    return (stmt, false);
-                }
-            }
+            token::LET => return self.parse_let_statement(),
             _ => return (ast::empty_statement(), false),
         }
     }

@@ -8,7 +8,7 @@ impl Expression {
 
 pub struct Statement {
     Token: token::Token,
-    Name: Identifier,
+    Name: *mut Identifier,
     Value: Expression,
 }
 
@@ -34,8 +34,8 @@ impl Program {
 }
 
 pub struct Identifier {
-    Token: token::Token,
-    Value: Expression,
+    pub Token: token::Token,
+    pub Value: String,
 }
 
 impl Identifier {
@@ -47,7 +47,7 @@ impl Identifier {
 
 pub struct LetStatement {
     pub Token: token::Token,
-    pub Name: Identifier,
+    pub Name: *mut Identifier,
     pub Value: Expression,
 }
 
@@ -58,10 +58,10 @@ impl LetStatement {
     }
 }
 
-pub fn empty_identifier() -> Identifier {
-    Identifier {
+pub fn empty_identifier() -> *mut Identifier {
+    &mut Identifier {
         Token: token::empty_token(),
-        Value: Expression {},
+        Value: "".to_string(),
     }
 }
 

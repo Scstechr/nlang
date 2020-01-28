@@ -1,3 +1,5 @@
+#![allow(unused_variables)]
+
 use crate::{ast, lexer, token};
 use std::ptr;
 
@@ -35,7 +37,7 @@ impl Parser {
     }
 
     fn parse_let_statement(&self) -> *const ast::Statement {
-        let mut stmt = &ast::LetStatement {
+        let mut stmt = &mut ast::LetStatement {
             Token: self.cur_token.clone(),
             Name: ast::empty_identifier(),
             Value: ast::Expression {},
@@ -43,6 +45,10 @@ impl Parser {
         if !self.expect_peek(&token::ID.to_string()) {
             return ptr::null();
         }
+        stmt.Name = &mut ast::Identifier {
+            Token: self.cur_token.clone(),
+            Value: self.cur_token.Literal.clone(),
+        };
         &ast::empty_statement()
     }
 }

@@ -2,10 +2,11 @@
 #![allow(dead_code)]
 #![allow(unused_imports)]
 
-pub mod ast;
-pub mod lexer;
+mod ast;
+mod lexer;
+mod parser;
 pub mod repl;
-pub mod token;
+mod token;
 
 #[cfg(test)]
 mod tests {

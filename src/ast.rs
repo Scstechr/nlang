@@ -46,9 +46,9 @@ impl Identifier {
 }
 
 pub struct LetStatement {
-    Token: token::Token,
-    Name: Identifier,
-    Value: Expression,
+    pub Token: token::Token,
+    pub Name: Identifier,
+    pub Value: Expression,
 }
 
 impl LetStatement {

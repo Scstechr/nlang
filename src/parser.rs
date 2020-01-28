@@ -13,6 +13,10 @@ impl Parser {
         self.peek_token = self.l.next_token();
     }
 
+    fn expect_peek(&self, t: &token::TokenType) -> bool {
+        true
+    }
+
     fn parse_statement(&self) -> ast::Statement {
         match &self.cur_token.Type as &str {
             token::LET => return ast::empty_statement(),
@@ -20,7 +24,7 @@ impl Parser {
         }
     }
 
-    fn parse_program(&mut self) -> *const ast::Program {
+    fn parse_program(&self) -> *const ast::Program {
         let program = &ast::Program {
             Statements: vec![ast::empty_statement()],
         };
@@ -30,7 +34,13 @@ impl Parser {
         return ptr::null();
     }
 
-    fn parse_let_statement() -> ast::Statement {
+    fn parse_let_statement(&self) -> ast::Statement {
+        let mut stmt = &ast::LetStatement {
+            Token: self.cur_token.clone(),
+            Name: ast::empty_identifier(),
+            Value: ast::Expression {},
+        };
+        if !self.expect_peek(&token::ID.to_string()) {}
         ast::empty_statement()
     }
 }

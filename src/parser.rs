@@ -17,23 +17,6 @@ impl Parser {
         let program = &ast::Program {
             Statements: vec![ast::empty_statement()],
         };
-        // let program = &ast::Program {
-        //     Statements: vec![
-        //     ast::Statement {
-        //         Token: token::Token {
-        //     Type: "".to_string(),
-        //     Literal: "".to_string(),
-        //         },
-        //     Name: ast::Identifier {
-        //         Token: token::Token {
-        //     Type: "".to_string(),
-        //     Literal: "".to_string(),
-        //         }
-        //         Value: ast::Expression {},
-        //     }
-        //     Value: ast::Expression{},
-        //     }],
-        // };
         return ptr::null();
     }
 }

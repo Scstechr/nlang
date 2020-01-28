@@ -1,4 +1,16 @@
 #![allow(unused_variables)]
+
+#[derive(Debug)]
+enum Precedence {
+    LOWEST,
+    EQUALS,
+    LESSGREATER,
+    SUM,
+    PRODUCT,
+    PREFIX,
+    CALL,
+}
+
 use crate::{
     ast::{self, Expression, Program, Statement},
     lexer::{self, Lexer},

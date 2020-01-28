@@ -65,6 +65,14 @@ pub fn empty_identifier() -> Identifier {
     }
 }
 
+pub fn empty_statement() -> Statement {
+    Statement {
+        Token: token::empty_token(),
+        Name: empty_identifier(),
+        Value: Expression {},
+    }
+}
+
 // pub trait Node {
 //     fn token_literal() -> String;
 // }

@@ -8,7 +8,7 @@ impl Expression {
 
 pub struct Statement {
     Token: token::Token,
-    pub Name: *mut Identifier,
+    Name: *mut Identifier,
     Value: Expression,
 }
 

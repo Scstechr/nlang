@@ -31,9 +31,9 @@ impl Parser {
         self.peek_token = self.l.next_token();
     }
 
-    fn parse_statement(&self) -> (ast::Statement, bool) {
+    fn parse_statement(&mut self) -> (ast::Statement, bool) {
         match &self.cur_token.Type as &str {
-            token::LET => return (ast::empty_statement(), true),
+            token::LET => return (self.parse_let_statement(), true),
             _ => return (ast::empty_statement(), false),
         }
     }
@@ -50,22 +50,22 @@ impl Parser {
         return program;
     }
 
-    fn parse_let_statement(&mut self) -> *mut ast::LetStatement {
-        let mut stmt = &mut ast::LetStatement {
+    fn parse_let_statement(&mut self) -> ast::Statement {
+        let mut stmt = ast::Statement {
             Token: self.cur_token.clone(),
             Name: ast::empty_identifier(),
             Value: ast::Expression {},
         };
-        if !self.expect_peek(token::ID) {
-            return ptr::null_mut();
-        }
-        stmt.Name = &mut ast::Identifier {
+        // if !self.expect_peek(token::ID) {
+        //     return ptr::null_mut();
+        // }
+        stmt.Name = ast::Identifier {
             Token: self.cur_token.clone(),
             Value: self.cur_token.Literal.clone(),
         };
-        if !self.expect_peek(token::ASSIGN) {
-            return ptr::null_mut();
-        }
+        // if !self.expect_peek(token::ASSIGN) {
+        //     return ptr::null_mut();
+        // }
         while !self.cur_token_is(token::SEMICOLON) {
             self.next_token();
         }

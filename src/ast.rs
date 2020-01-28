@@ -9,9 +9,9 @@ impl Expression {
 
 #[derive(Debug)]
 pub struct Statement {
-    Token: token::Token,
-    Name: *mut Identifier,
-    Value: Expression,
+    pub Token: token::Token,
+    pub Name: Identifier,
+    pub Value: Expression,
 }
 
 impl Statement {
@@ -49,22 +49,8 @@ impl Identifier {
     }
 }
 
-#[derive(Debug)]
-pub struct LetStatement {
-    pub Token: token::Token,
-    pub Name: *mut Identifier,
-    pub Value: Expression,
-}
-
-impl LetStatement {
-    fn statement_node(&self) {}
-    fn token_literal(&self) -> &String {
-        &self.Token.Literal
-    }
-}
-
-pub fn empty_identifier() -> *mut Identifier {
-    &mut Identifier {
+pub fn empty_identifier() -> Identifier {
+    Identifier {
         Token: token::empty_token(),
         Value: "EMPTY".to_string(),
     }

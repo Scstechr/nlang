@@ -1,5 +1,4 @@
-extern crate nlang;
-use nlang::{ast::Statement, lexer, parser};
+use nlang::{self, ast::Statement, lexer, parser};
 use std::ptr;
 
 #[test]

@@ -1,7 +1,7 @@
 #![allow(unused_variables)]
 
 use crate::{
-    ast,
+    ast::{self, Program, Statement},
     lexer::{self, Lexer},
     token::{self, Token},
 };
@@ -31,15 +31,15 @@ impl Parser {
         self.peek_token = self.l.next_token();
     }
 
-    fn parse_statement(&mut self) -> (ast::Statement, bool) {
+    fn parse_statement(&mut self) -> (Statement, bool) {
         match &self.cur_token.Type as &str {
             token::LET => return self.parse_let_statement(),
             _ => return (ast::empty_statement(), false),
         }
     }
 
-    pub fn parse_program(&mut self) -> ast::Program {
-        let mut program = ast::Program { Statements: vec![] };
+    pub fn parse_program(&mut self) -> Program {
+        let mut program = Program { Statements: vec![] };
         while self.cur_token.Type != token::EOF {
             let (stmt, f) = self.parse_statement();
             if f {
@@ -50,8 +50,8 @@ impl Parser {
         return program;
     }
 
-    fn parse_let_statement(&mut self) -> (ast::Statement, bool) {
-        let mut stmt = ast::Statement {
+    fn parse_let_statement(&mut self) -> (Statement, bool) {
+        let mut stmt = Statement {
             Token: self.cur_token.clone(),
             Name: ast::empty_identifier(),
             Value: ast::Expression {},

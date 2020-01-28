@@ -1,5 +1,3 @@
-extern crate nlang;
-
 use nlang::repl;
 
 fn main() {

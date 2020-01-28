@@ -44,7 +44,7 @@ pub struct Identifier {
 
 impl Identifier {
     fn expression_node(&self) {}
-    fn token_literal(&self) -> &String {
+    pub fn token_literal(&self) -> &String {
         &self.Token.Literal
     }
 }

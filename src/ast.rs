@@ -58,6 +58,13 @@ impl LetStatement {
     }
 }
 
+pub fn empty_identifier() -> Identifier {
+    Identifier {
+        Token: token::empty_token(),
+        Value: Expression {},
+    }
+}
+
 // pub trait Node {
 //     fn token_literal() -> String;
 // }

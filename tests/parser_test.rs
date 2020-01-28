@@ -7,7 +7,8 @@ fn parser_test_let_statements() {
 let y = 10;
 let foobar = 838383;";
     let l = lexer::new(input);
-    let mut p = parser::new(l);
+    let p = parser::new(l);
+    let program = p.parse_program();
 }
 
 #[test]

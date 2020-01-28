@@ -16,7 +16,7 @@ pub struct Statement {
 
 impl Statement {
     fn statement_node(&self) {}
-    fn token_literal(&self) -> &String {
+    pub fn token_literal(&self) -> &String {
         &self.Token.Literal
     }
 }

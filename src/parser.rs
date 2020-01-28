@@ -119,4 +119,10 @@ impl Parser {
         );
         self.errors.push(msg);
     }
+
+    fn parse_prefix(&self) {
+    }
+
+    fn parse_infix(&self) {
+    }
 }

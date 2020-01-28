@@ -1,7 +1,7 @@
 #![allow(unused_variables)]
 
 use crate::{
-    ast::{self, Program, Statement},
+    ast::{self, Expression, Program, Statement},
     lexer::{self, Lexer},
     token::{self, Token},
 };
@@ -36,6 +36,7 @@ impl Parser {
     fn parse_statement(&mut self) -> (Statement, bool) {
         match &self.cur_token.Type as &str {
             token::LET => return self.parse_let_statement(),
+            token::RETURN => return self.parse_return_statement(),
             _ => return (ast::empty_statement(), false),
         }
     }
@@ -54,11 +55,33 @@ impl Parser {
         return program;
     }
 
+    fn parse_return_statement(&mut self) -> (Statement, bool) {
+        let mut stmt = Statement {
+            Token: self.cur_token.clone(),
+            Name: ast::empty_identifier(),
+            Value: Expression {},
+        };
+        if !self.expect_peek(token::IDENT) {
+            return (stmt, false);
+        }
+        stmt.Name = ast::Identifier {
+            Token: self.cur_token.clone(),
+            Value: self.cur_token.Literal.clone(),
+        };
+        if !self.expect_peek(token::ASSIGN) {
+            return (stmt, false);
+        }
+        while !self.cur_token_is(token::SEMICOLON) {
+            self.next_token();
+        }
+        return (stmt, true);
+    }
+
     fn parse_let_statement(&mut self) -> (Statement, bool) {
         let mut stmt = Statement {
             Token: self.cur_token.clone(),
             Name: ast::empty_identifier(),
-            Value: ast::Expression {},
+            Value: Expression {},
         };
         if !self.expect_peek(token::IDENT) {
             return (stmt, false);

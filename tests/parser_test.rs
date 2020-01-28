@@ -20,5 +20,4 @@ let foobar = 838383;";
     // }
 }
 
-#[test]
 fn parser_test_let_statement() {}

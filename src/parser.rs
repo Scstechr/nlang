@@ -12,6 +12,7 @@ pub struct Parser {
     l: Lexer,
     cur_token: Token,
     peek_token: Token,
+    errors: Vec<String>,
 }
 
 impl Parser {
@@ -20,6 +21,7 @@ impl Parser {
             l: l,
             cur_token: lexer::empty_token(),
             peek_token: lexer::empty_token(),
+            errors: Vec::new(),
         };
         p.next_token();
         p.next_token();
@@ -39,7 +41,9 @@ impl Parser {
     }
 
     pub fn parse_program(&mut self) -> Program {
-        let mut program = Program { Statements: vec![] };
+        let mut program = Program {
+            Statements: Vec::new(),
+        };
         while self.cur_token.Type != token::EOF {
             let (stmt, f) = self.parse_statement();
             if f {

@@ -69,3 +69,10 @@ pub struct ExpressionStatement {
     pub Token: token::Token,
     pub Expression: Expression,
 }
+
+impl ExpressionStatement {
+    fn expression_node(&self) {}
+    pub fn token_literal(&self) -> &String {
+        &self.Token.Literal
+    }
+}

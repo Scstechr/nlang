@@ -22,16 +22,16 @@ impl Parser {
         }
     }
 
-    pub fn parse_program(&self) -> *const ast::Program {
+    pub fn parse_program(&mut self) -> *const ast::Program {
         let program = &mut ast::Program { Statements: vec![] };
         while self.cur_token.Type != token::EOF {
             let (stmt, f) = self.parse_statement();
             if f {
                 program.Statements.push(stmt);
             }
-            // if stmt !=
+            self.next_token();
         }
-        return ptr::null();
+        return program;
     }
 
     fn parse_let_statement(&mut self) -> *const ast::Statement {

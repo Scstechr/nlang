@@ -12,7 +12,7 @@ enum Precedence {
 }
 
 use crate::{
-    ast::{self, Expression, Program, Statement},
+    ast::{self, Expression, Identifier, Program, Statement},
     lexer::{self, Lexer},
     token::{self, Token},
 };
@@ -128,6 +128,20 @@ impl Parser {
         return (left_exp, true);
     }
 
+    fn parse_prefix(&self) -> (Expression, bool) {
+        (Expression {}, true)
+    }
+
+    fn parse_infix(&self) -> (Expression, bool) {
+        (Expression {}, true)
+    }
+
+    fn parse_identifier(&self) -> Identifier {
+        Identifier {
+            Token: self.cur_token.clone(),
+            Value: self.cur_token.Literal.clone(),
+        }
+    }
     fn peek_token_is(&self, t: &'static str) -> bool {
         self.peek_token.Type == t
     }
@@ -156,13 +170,5 @@ impl Parser {
             t, self.peek_token.Type
         );
         self.errors.push(msg);
-    }
-
-    fn parse_prefix(&self) -> (Expression, bool) {
-        (Expression {}, true)
-    }
-
-    fn parse_infix(&self) -> (Expression, bool) {
-        (Expression {}, true)
     }
 }

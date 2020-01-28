@@ -8,8 +8,10 @@ fn parser_test_let_statements() {
 let y = 10;
 let foobar = 838383;";
     let l = lexer::new(input);
-    let p = parser::Parser::new(l);
+    let mut p = parser::Parser::new(l);
     println!("{:#?}", p);
+    let program = p.parse_program();
+    println!("{:#?}", program);
     // unsafe {
     //     if let Some(ptr) = p.as_ref() {
     //         let program = ptr.parse_program();

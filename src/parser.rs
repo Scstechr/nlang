@@ -38,8 +38,8 @@ impl Parser {
         }
     }
 
-    pub fn parse_program(&mut self) -> *mut ast::Program {
-        let program = &mut ast::Program { Statements: vec![] };
+    pub fn parse_program(&mut self) -> ast::Program {
+        let mut program = ast::Program { Statements: vec![] };
         while self.cur_token.Type != token::EOF {
             let (stmt, f) = self.parse_statement();
             if f {

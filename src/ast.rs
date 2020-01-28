@@ -1,11 +1,13 @@
 use crate::token;
 
+#[derive(Debug)]
 pub struct Expression {}
 
 impl Expression {
     fn expression_node(&self) {}
 }
 
+#[derive(Debug)]
 pub struct Statement {
     Token: token::Token,
     Name: *mut Identifier,
@@ -19,6 +21,7 @@ impl Statement {
     }
 }
 
+#[derive(Debug)]
 pub struct Program {
     pub Statements: Vec<Statement>,
 }
@@ -33,6 +36,7 @@ impl Program {
     }
 }
 
+#[derive(Debug)]
 pub struct Identifier {
     pub Token: token::Token,
     pub Value: String,
@@ -45,6 +49,7 @@ impl Identifier {
     }
 }
 
+#[derive(Debug)]
 pub struct LetStatement {
     pub Token: token::Token,
     pub Name: *mut Identifier,

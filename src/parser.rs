@@ -14,6 +14,23 @@ impl Parser {
     }
 
     fn parse_program(&mut self) -> *const ast::Program {
+        // let program = &ast::Program {
+        //     Statements: vec![
+        //     ast::Statement {
+        //         Token: token::Token {
+        //     Type: "".to_string(),
+        //     Literal: "".to_string(),
+        //         },
+        //     Name: ast::Identifier {
+        //         Token: token::Token {
+        //     Type: "".to_string(),
+        //     Literal: "".to_string(),
+        //         }
+        //         Value: ast::Expression {},
+        //     }
+        //     Value: ast::Expression{},
+        //     }],
+        // };
         return ptr::null();
     }
 }
@@ -21,14 +38,8 @@ impl Parser {
 pub fn new(l: lexer::Lexer) -> *mut Parser {
     let p: &mut Parser = &mut Parser {
         l: l,
-        cur_token: token::Token {
-            Type: "".to_string(),
-            Literal: "".to_string(),
-        },
-        peek_token: token::Token {
-            Type: "".to_string(),
-            Literal: "".to_string(),
-        },
+        cur_token: lexer::empty_token(),
+        peek_token: lexer::empty_token(),
     };
     p.next_token();
     p.next_token();

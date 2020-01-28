@@ -172,3 +172,10 @@ fn is_digit(ch: &u8) -> bool {
     let c = char::from(*ch);
     c.is_digit(10)
 }
+
+pub fn empty_token() -> token::Token {
+    token::Token {
+        Type: "".to_string(),
+        Literal: "".to_string(),
+    }
+}

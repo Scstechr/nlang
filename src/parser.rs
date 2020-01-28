@@ -15,14 +15,6 @@ impl Parser {
         self.peek_token = self.l.next_token();
     }
 
-    fn expect_peek(&self, t: &'static str) -> bool {
-        self.peek_token.Type == t
-    }
-
-    fn cur_token_is(&self, t: &'static str) -> bool {
-        self.peek_token.Type == t
-    }
-
     fn parse_statement(&self) -> ast::Statement {
         match &self.cur_token.Type as &str {
             token::LET => return ast::empty_statement(),
@@ -58,6 +50,18 @@ impl Parser {
         }
         while !self.cur_token_is(token::SEMICOLON) {}
         &ast::empty_statement()
+    }
+
+    fn peek_token_is(&self, t: &'static str) -> bool {
+        self.peek_token.Type == t
+    }
+
+    fn cur_token_is(&self, t: &'static str) -> bool {
+        self.peek_token.Type == t
+    }
+
+    fn expect_peek(&self, t: &'static str) -> bool {
+        self.peek_token.Type == t
     }
 }
 

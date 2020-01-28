@@ -94,7 +94,7 @@ impl Parser {
         }
     }
 
-    fn errors(&self) -> Vec<String> {
+    pub fn errors(&self) -> Vec<String> {
         self.errors.clone()
     }
 

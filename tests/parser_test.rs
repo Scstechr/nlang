@@ -9,6 +9,7 @@ let foobar = 838383;";
     let l = lexer::new(input);
     let mut p = parser::Parser::new(l);
     let program = p.parse_program();
+    check_parser_errors(&p);
     assert_eq!(3, program.Statements.len());
     for stmt in &program.Statements {
         parser_test_let_statement(&stmt);
@@ -18,4 +19,9 @@ let foobar = 838383;";
 fn parser_test_let_statement(s: &Statement) {
     println!("{:?}", s);
     assert_eq!("let", s.token_literal());
+}
+
+fn check_parser_errors(p: &parser::Parser) {
+    let errors = p.errors();
+    assert_eq!(0, errors.len());
 }

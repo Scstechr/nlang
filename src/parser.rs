@@ -32,7 +32,7 @@ impl Parser {
         return ptr::null();
     }
 
-    fn parse_let_statement(&self) -> *const ast::Statement {
+    fn parse_let_statement(&mut self) -> *const ast::Statement {
         let mut stmt = &mut ast::LetStatement {
             Token: self.cur_token.clone(),
             Name: ast::empty_identifier(),
@@ -48,7 +48,9 @@ impl Parser {
         if !self.expect_peek(token::ASSIGN) {
             return ptr::null();
         }
-        while !self.cur_token_is(token::SEMICOLON) {}
+        while !self.cur_token_is(token::SEMICOLON) {
+            self.next_token();
+        }
         &ast::empty_statement()
     }
 
@@ -60,8 +62,13 @@ impl Parser {
         self.peek_token.Type == t
     }
 
-    fn expect_peek(&self, t: &'static str) -> bool {
-        self.peek_token.Type == t
+    fn expect_peek(&mut self, t: &'static str) -> bool {
+        if self.peek_token_is(t) {
+            self.next_token();
+            return true;
+        } else {
+            return false;
+        }
     }
 }
 

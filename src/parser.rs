@@ -1,5 +1,4 @@
 #![allow(unused_variables)]
-
 use crate::{
     ast::{self, Expression, Program, Statement},
     lexer::{self, Lexer},
@@ -120,9 +119,11 @@ impl Parser {
         self.errors.push(msg);
     }
 
-    fn parse_prefix(&self) {
+    fn parse_prefix(&self) -> Expression {
+        Expression {}
     }
 
-    fn parse_infix(&self) {
+    fn parse_infix(&self) -> Expression {
+        Expression {}
     }
 }

@@ -89,7 +89,20 @@ impl Parser {
             self.next_token();
             return true;
         } else {
+            self.peek_error(t);
             return false;
         }
+    }
+
+    fn errors(&self) -> Vec<String> {
+        self.errors.clone()
+    }
+
+    fn peek_error(&mut self, t: &'static str) {
+        let msg = format!(
+            "expected next token to be {}, got {} instead",
+            t, self.peek_token.Type
+        );
+        self.errors.push(msg);
     }
 }

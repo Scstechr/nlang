@@ -56,7 +56,7 @@ impl Parser {
             Name: ast::empty_identifier(),
             Value: ast::Expression {},
         };
-        if !self.expect_peek(token::ID) {
+        if !self.expect_peek(token::IDENT) {
             return (stmt, false);
         }
         stmt.Name = ast::Identifier {

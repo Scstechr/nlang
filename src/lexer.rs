@@ -117,7 +117,7 @@ impl Lexer {
                             "true" => token::TRUE.to_string(),
                             "false" => token::FALSE.to_string(),
                             "return" => token::RETURN.to_string(),
-                            _ => token::ID.to_string(),
+                            _ => token::IDENT.to_string(),
                         };
                         return token::Token {
                             Type: t,

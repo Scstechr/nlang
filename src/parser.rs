@@ -22,7 +22,7 @@ impl Parser {
         }
     }
 
-    pub fn parse_program(&mut self) -> *const ast::Program {
+    pub fn parse_program(&mut self) -> *mut ast::Program {
         let program = &mut ast::Program { Statements: vec![] };
         while self.cur_token.Type != token::EOF {
             let (stmt, f) = self.parse_statement();
@@ -34,26 +34,26 @@ impl Parser {
         return program;
     }
 
-    fn parse_let_statement(&mut self) -> *const ast::Statement {
+    fn parse_let_statement(&mut self) -> *mut ast::LetStatement {
         let mut stmt = &mut ast::LetStatement {
             Token: self.cur_token.clone(),
             Name: ast::empty_identifier(),
             Value: ast::Expression {},
         };
         if !self.expect_peek(token::ID) {
-            return ptr::null();
+            return ptr::null_mut();
         }
         stmt.Name = &mut ast::Identifier {
             Token: self.cur_token.clone(),
             Value: self.cur_token.Literal.clone(),
         };
         if !self.expect_peek(token::ASSIGN) {
-            return ptr::null();
+            return ptr::null_mut();
         }
         while !self.cur_token_is(token::SEMICOLON) {
             self.next_token();
         }
-        &ast::empty_statement()
+        return stmt;
     }
 
     fn peek_token_is(&self, t: &'static str) -> bool {

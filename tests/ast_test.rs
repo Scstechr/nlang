@@ -1,6 +1,7 @@
 use nlang::{
     self,
-    ast::{Expression, Identifier, Program, Statement},
+    ast::{self, Expression, Identifier, Program, Statement},
+    lexer, parser,
     token::{self, Token},
 };
 
@@ -19,8 +20,38 @@ fn ast_test() {
                 },
                 Value: "myVar".to_string(),
             },
-            Value: Expression {},
+            Value: Expression {
+                Name: ast::empty_identifier(),
+            },
         }],
     };
-    assert_eq!("\"let\" \"myVar\" = Expression;", program.string());
+    assert_eq!("\"let\" \"myVar\" = Expression { Name: Identifier { Token: Token { Type: \"\", Literal: \"\" }, Value: \"\" } };", program.string());
+}
+
+#[test]
+fn ast_simple_test() {
+    let input = "foobar;";
+    let l = lexer::new(input);
+    let mut p = parser::Parser::new(l);
+    let program = p.parse_program();
+    check_parser_errors(&p);
+    assert_eq!(1, program.Statements.len());
+    println!("{:#?}", program);
+    assert_eq!("IDENT", program.Statements[0].Value.token_literal());
+    // for (stmt, t) in program.Statements.iter().zip(tests) {
+    //     parser_test_let_statement(&stmt, &t);
+    // }
+}
+
+fn check_parser_errors(p: &parser::Parser) {
+    let errors = p.errors();
+    if errors.is_empty() {
+        return;
+    } else {
+        println!("parser has {} error(s)", errors.len());
+        for m in errors {
+            println!("parser error: {}", m);
+        }
+        panic!("exit due to parsing error...");
+    }
 }

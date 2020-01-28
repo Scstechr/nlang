@@ -16,7 +16,7 @@ use crate::{
     lexer::{self, Lexer},
     token::{self, Token},
 };
-use std::ptr;
+use std::collections::HashMap;
 
 #[derive(Debug)]
 pub struct Parser {
@@ -70,7 +70,7 @@ impl Parser {
         let stmt = Statement {
             Token: self.cur_token.clone(),
             Name: ast::empty_identifier(),
-            Value: Expression {},
+            Value: ast::empty_expression(),
         };
         self.next_token();
         while !self.cur_token_is(token::SEMICOLON) {
@@ -84,7 +84,7 @@ impl Parser {
         let mut stmt = Statement {
             Token: self.cur_token.clone(),
             Name: ast::empty_identifier(),
-            Value: Expression {},
+            Value: ast::empty_expression(),
         };
         if !self.expect_peek(token::IDENT) {
             return (stmt, false);
@@ -107,7 +107,7 @@ impl Parser {
         let mut stmt = Statement {
             Token: self.cur_token.clone(),
             Name: ast::empty_identifier(),
-            Value: Expression {},
+            Value: ast::empty_expression(),
         };
         let (e, f) = self.parse_expression(Precedence::LOWEST);
         stmt.Value = e;
@@ -122,18 +122,32 @@ impl Parser {
         // let (prefix, f) = self.parse_prefix(self.cur_token.Type);
         let (prefix, f) = self.parse_prefix();
         if !f {
-            return (Expression {}, false);
+            return (ast::empty_expression(), false);
         }
-        let left_exp = prefix;
-        return (left_exp, true);
+        (
+            Expression {
+                Name: self.parse_identifier(),
+            },
+            true,
+        )
     }
 
     fn parse_prefix(&self) -> (Expression, bool) {
-        (Expression {}, true)
+        match &self.cur_token.Type as &str {
+            token::IDENT => {
+                return (
+                    Expression {
+                        Name: self.parse_identifier(),
+                    },
+                    true,
+                )
+            }
+            _ => return (ast::empty_expression(), false),
+        }
     }
 
     fn parse_infix(&self) -> (Expression, bool) {
-        (Expression {}, true)
+        (ast::empty_expression(), true)
     }
 
     fn parse_identifier(&self) -> Identifier {

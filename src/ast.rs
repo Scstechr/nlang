@@ -1,7 +1,11 @@
 use crate::token;
 
-#[derive(Debug, PartialEq)]
-pub struct Expression {}
+#[derive(Debug)]
+pub struct Expression {
+    // pub Token: token::Token,
+    pub Name: Identifier,
+    // pub Value: Expression,
+}
 
 impl Expression {
     fn expression_node(&self) {}
@@ -110,22 +114,14 @@ pub fn empty_statement() -> Statement {
     Statement {
         Token: token::empty_token(),
         Name: empty_identifier(),
-        Value: Expression {},
+        Value: empty_expression(),
     }
 }
 
-// #[derive(Debug)]
-// pub struct ExpressionStatement {
-//     pub Token: token::Token,
-//     pub Expression: Expression,
-// }
-
-// impl ExpressionStatement {
-//     fn expression_node(&self) {}
-//     pub fn token_literal(&self) -> &String {
-//         &self.Token.Literal
-//     }
-//     pub fn string(&self) -> String {
-//         format!("{}", self.Expression.string())
-//     }
-// }
+pub fn empty_expression() -> Expression {
+    Expression {
+        // Token: token::empty_token(),
+        Name: empty_identifier(),
+        // Value: empty_expression(),
+    }
+}

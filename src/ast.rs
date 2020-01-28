@@ -20,7 +20,7 @@ impl Statement {
 }
 
 pub struct Program {
-    Statements: Vec<Statement>,
+    pub Statements: Vec<Statement>,
 }
 
 impl Program {

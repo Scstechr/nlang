@@ -14,6 +14,9 @@ impl Parser {
     }
 
     fn parse_program(&mut self) -> *const ast::Program {
+        let program = &ast::Program {
+            Statements: vec![ast::empty_statement()],
+        };
         // let program = &ast::Program {
         //     Statements: vec![
         //     ast::Statement {

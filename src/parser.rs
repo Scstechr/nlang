@@ -1,12 +1,12 @@
 #![allow(unused_variables)]
 
-use crate::{ast, lexer, token};
+use crate::{ast, lexer, token::{self, Token}};
 use std::ptr;
 
 pub struct Parser {
     l: lexer::Lexer,
-    cur_token: token::Token,
-    peek_token: token::Token,
+    cur_token: Token,
+    peek_token: Token,
 }
 
 impl Parser {

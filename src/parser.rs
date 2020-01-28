@@ -56,21 +56,12 @@ impl Parser {
     }
 
     fn parse_return_statement(&mut self) -> (Statement, bool) {
-        let mut stmt = Statement {
+        let stmt = Statement {
             Token: self.cur_token.clone(),
             Name: ast::empty_identifier(),
             Value: Expression {},
         };
-        if !self.expect_peek(token::IDENT) {
-            return (stmt, false);
-        }
-        stmt.Name = ast::Identifier {
-            Token: self.cur_token.clone(),
-            Value: self.cur_token.Literal.clone(),
-        };
-        if !self.expect_peek(token::ASSIGN) {
-            return (stmt, false);
-        }
+        self.next_token();
         while !self.cur_token_is(token::SEMICOLON) {
             self.next_token();
         }

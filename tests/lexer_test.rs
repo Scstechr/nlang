@@ -1,10 +1,9 @@
 extern crate nlang;
+use nlang::lexer;
+use nlang::token;
 
 #[test]
 fn lexer_simple_test() {
-    use nlang::lexer;
-    use nlang::token;
-
     let input = "=+(){},;";
     let tests = vec![
         lexer::new_token(token::ASSIGN, "=".as_bytes()),
@@ -27,9 +26,6 @@ fn lexer_simple_test() {
 
 #[test]
 fn lexer_operator_test() {
-    use nlang::lexer;
-    use nlang::token;
-
     let input = "let ten = 10;
 
 let {
@@ -97,9 +93,6 @@ div = x / y,
 
 #[test]
 fn lexer_keyword_test() {
-    use nlang::lexer;
-    use nlang::token;
-
     let input = "if true {
 return false;
 } else {
@@ -144,9 +137,6 @@ return true;
 
 #[test]
 fn lexer_eq_test() {
-    use nlang::lexer;
-    use nlang::token;
-
     let input = "if a {
 != b { >= c },
 == d { <= e },

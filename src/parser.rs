@@ -76,6 +76,7 @@ impl Parser {
         while !self.cur_token_is(token::SEMICOLON) {
             self.next_token();
         }
+        self.next_token();
         return (stmt, true);
     }
 
@@ -98,30 +99,33 @@ impl Parser {
         while !self.cur_token_is(token::SEMICOLON) {
             self.next_token();
         }
+        self.next_token();
         return (stmt, true);
     }
 
     fn parse_expression_statement(&mut self) -> (Statement, bool) {
-        let stmt = ast::empty_statement();
-        // let mut stmt = Statement {
-        //     Token: self.cur_token.clone(),
-        //     Name: ast::empty_identifier(),
-        //     Value: Expression {},
-        // };
-        // if !self.expect_peek(token::IDENT) {
-        //     return (stmt, false);
-        // }
-        // stmt.Name = ast::Identifier {
-        //     Token: self.cur_token.clone(),
-        //     Value: self.cur_token.Literal.clone(),
-        // };
-        // if !self.expect_peek(token::ASSIGN) {
-        //     return (stmt, false);
-        // }
-        // while !self.cur_token_is(token::SEMICOLON) {
-        //     self.next_token();
-        // }
-        return (stmt, false);
+        let mut stmt = Statement {
+            Token: self.cur_token.clone(),
+            Name: ast::empty_identifier(),
+            Value: Expression {},
+        };
+        let (e, f) = self.parse_expression(Precedence::LOWEST);
+        stmt.Value = e;
+        // println!("{:?}", stmt.Value);
+        if self.peek_token_is(token::SEMICOLON) {
+            self.next_token();
+        }
+        return (stmt, f);
+    }
+
+    fn parse_expression(&self, precedence: Precedence) -> (Expression, bool) {
+        // let (prefix, f) = self.parse_prefix(self.cur_token.Type);
+        let (prefix, f) = self.parse_prefix();
+        if !f {
+            return (Expression {}, false);
+        }
+        let left_exp = prefix;
+        return (left_exp, true);
     }
 
     fn peek_token_is(&self, t: &'static str) -> bool {
@@ -154,11 +158,11 @@ impl Parser {
         self.errors.push(msg);
     }
 
-    fn parse_prefix(&self) -> Expression {
-        Expression {}
+    fn parse_prefix(&self) -> (Expression, bool) {
+        (Expression {}, true)
     }
 
-    fn parse_infix(&self) -> Expression {
-        Expression {}
+    fn parse_infix(&self) -> (Expression, bool) {
+        (Expression {}, true)
     }
 }

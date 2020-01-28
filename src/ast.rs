@@ -114,18 +114,18 @@ pub fn empty_statement() -> Statement {
     }
 }
 
-#[derive(Debug)]
-pub struct ExpressionStatement {
-    pub Token: token::Token,
-    pub Expression: Expression,
-}
+// #[derive(Debug)]
+// pub struct ExpressionStatement {
+//     pub Token: token::Token,
+//     pub Expression: Expression,
+// }
 
-impl ExpressionStatement {
-    fn expression_node(&self) {}
-    pub fn token_literal(&self) -> &String {
-        &self.Token.Literal
-    }
-    pub fn string(&self) -> String {
-        format!("{}", self.Expression.string())
-    }
-}
+// impl ExpressionStatement {
+//     fn expression_node(&self) {}
+//     pub fn token_literal(&self) -> &String {
+//         &self.Token.Literal
+//     }
+//     pub fn string(&self) -> String {
+//         format!("{}", self.Expression.string())
+//     }
+// }

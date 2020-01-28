@@ -11,66 +11,12 @@ let foobar = 838383;";
     let mut p = parser::Parser::new(l);
     let program = p.parse_program();
     assert_eq!(3, program.Statements.len());
-    parser_test_let_statement(&program.Statements);
-    // println!("{:#?}", program);
-    // unsafe {
-    //     if let Some(ptr) = p.as_ref() {
-    //         let program = ptr.parse_program();
-    //     }
-    //     // let program = p.as_ref().unwrap().parse_program();
-    // }
-}
-
-fn parser_test_let_statement(s: &Vec<Statement>) {
-    for stmt in s {
-        println!("{:?}", stmt);
-        if stmt.token_literal() != "let" {
-            println!("error");
-        }
+    for stmt in &program.Statements {
+        parser_test_let_statement(&stmt);
     }
 }
-// Program {
-//     Statements: [
-//         Statement {
-//             Token: Token {
-//                 Type: "let",
-//                 Literal: "let",
-//             },
-//             Name: Identifier {
-//                 Token: Token {
-//                     Type: "ID",
-//                     Literal: "x",
-//                 },
-//                 Value: "x",
-//             },
-//             Value: Expression,
-//         },
-//         Statement {
-//             Token: Token {
-//                 Type: "let",
-//                 Literal: "let",
-//             },
-//             Name: Identifier {
-//                 Token: Token {
-//                     Type: "ID",
-//                     Literal: "y",
-//                 },
-//                 Value: "y",
-//             },
-//             Value: Expression,
-//         },
-//         Statement {
-//             Token: Token {
-//                 Type: "let",
-//                 Literal: "let",
-//             },
-//             Name: Identifier {
-//                 Token: Token {
-//                     Type: "ID",
-//                     Literal: "foobar",
-//                 },
-//                 Value: "foobar",
-//             },
-//             Value: Expression,
-//         },
-//     ],
+
+fn parser_test_let_statement(s: &Statement) {
+    println!("{:?}", s);
+    assert_eq!("let", s.token_literal());
+}

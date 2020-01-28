@@ -64,14 +64,8 @@ pub fn empty_statement() -> Statement {
     }
 }
 
-// pub trait Node {
-//     fn token_literal() -> String;
-// }
-
-// impl Statement {
-//     fn statement_node(&self);
-// }
-
-// pub struct Program {
-//     Statement: Vec<Statement>,
-// }
+#[derive(Debug)]
+pub struct ExpressionStatement {
+    pub Token: token::Token,
+    pub Expression: Expression,
+}

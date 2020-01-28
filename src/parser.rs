@@ -1,15 +1,31 @@
 #![allow(unused_variables)]
 
-use crate::{ast, lexer, token::{self, Token}};
+use crate::{
+    ast,
+    lexer::{self, Lexer},
+    token::{self, Token},
+};
 use std::ptr;
 
+#[derive(Debug)]
 pub struct Parser {
-    l: lexer::Lexer,
+    l: Lexer,
     cur_token: Token,
     peek_token: Token,
 }
 
 impl Parser {
+    pub fn new(l: Lexer) -> Self {
+        let mut p = Parser {
+            l: l,
+            cur_token: lexer::empty_token(),
+            peek_token: lexer::empty_token(),
+        };
+        p.next_token();
+        p.next_token();
+        return p;
+    }
+
     fn next_token(&mut self) {
         self.cur_token = self.peek_token.clone();
         self.peek_token = self.l.next_token();
@@ -72,15 +88,4 @@ impl Parser {
             return false;
         }
     }
-}
-
-pub fn new(l: lexer::Lexer) -> *mut Parser {
-    let p: &mut Parser = &mut Parser {
-        l: l,
-        cur_token: lexer::empty_token(),
-        peek_token: lexer::empty_token(),
-    };
-    p.next_token();
-    p.next_token();
-    return p;
 }

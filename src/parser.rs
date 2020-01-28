@@ -16,7 +16,7 @@ impl Parser {
     }
 
     fn expect_peek(&self, t: &'static str) -> bool {
-        true
+        self.peek_token.Type == t
     }
 
     fn cur_token_is(&self, t: &'static str) -> bool {

@@ -36,8 +36,9 @@ fn ast_simple_test() {
     let program = p.parse_program();
     check_parser_errors(&p);
     assert_eq!(1, program.Statements.len());
-    println!("{:#?}", program);
-    assert_eq!("IDENT", program.Statements[0].Value.token_literal());
+    // println!("{:#?}", program);
+    assert_eq!("IDENT", program.Statements[0].Value.token_type());
+    assert_eq!("foobar", program.Statements[0].Value.token_literal());
     // for (stmt, t) in program.Statements.iter().zip(tests) {
     //     parser_test_let_statement(&stmt, &t);
     // }

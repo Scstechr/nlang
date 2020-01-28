@@ -9,6 +9,12 @@ pub struct Expression {
 
 impl Expression {
     fn expression_node(&self) {}
+    pub fn token_literal(&self) -> &String {
+        &self.Name.token_literal()
+    }
+    pub fn token_type(&self) -> &String {
+        &self.Name.token_type()
+    }
     pub fn string(&self) -> String {
         "".to_string()
     }
@@ -97,6 +103,9 @@ impl Identifier {
     fn expression_node(&self) {}
     pub fn token_literal(&self) -> &String {
         &self.Token.Literal
+    }
+    pub fn token_type(&self) -> &String {
+        &self.Token.Type
     }
     pub fn string(&self) -> String {
         self.Value.clone()

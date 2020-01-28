@@ -105,7 +105,7 @@ impl Parser {
 
     fn parse_expression_statement(&mut self) -> (Statement, bool) {
         let mut stmt = Statement {
-            Token: self.cur_token.clone(),
+            Token: token::empty_token(),
             Name: ast::empty_identifier(),
             Value: ast::empty_expression(),
         };

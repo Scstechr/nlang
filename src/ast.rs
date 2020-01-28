@@ -2,7 +2,17 @@ use crate::token;
 
 pub struct Expression {}
 
-pub struct Identifier {}
+pub struct Identifier {
+    Token: token::Token,
+    Value: Expression,
+}
+
+impl Identifier {
+    fn expressionNode(&self) {}
+    fn TokenLiteral(&self) -> &String {
+        &self.Token.Literal
+    }
+}
 
 pub struct LetStatement {
     Token: token::Token,
@@ -16,6 +26,7 @@ impl LetStatement {
         &self.Token.Literal
     }
 }
+
 // pub trait Node {
 //     fn token_literal() -> String;
 // }

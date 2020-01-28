@@ -13,11 +13,25 @@ impl Parser {
         self.peek_token = self.l.next_token();
     }
 
+    fn parse_statement(&self) -> ast::Statement {
+        match &self.cur_token.Type as &str {
+            token::LET => return ast::empty_statement(),
+            _ => return ast::empty_statement(),
+        }
+    }
+
     fn parse_program(&mut self) -> *const ast::Program {
         let program = &ast::Program {
             Statements: vec![ast::empty_statement()],
         };
+        while self.cur_token.Type != token::EOF {
+            let stmt = self.parse_statement();
+        }
         return ptr::null();
+    }
+
+    fn parse_let_statement() -> ast::Statement {
+        ast::empty_statement()
     }
 }
 

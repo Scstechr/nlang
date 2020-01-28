@@ -32,14 +32,6 @@ impl Parser {
         self.peek_token = self.l.next_token();
     }
 
-    fn parse_statement(&mut self) -> (Statement, bool) {
-        match &self.cur_token.Type as &str {
-            token::LET => return self.parse_let_statement(),
-            token::RETURN => return self.parse_return_statement(),
-            _ => return (ast::empty_statement(), false),
-        }
-    }
-
     pub fn parse_program(&mut self) -> Program {
         let mut program = Program {
             Statements: Vec::new(),
@@ -52,6 +44,14 @@ impl Parser {
             self.next_token();
         }
         return program;
+    }
+
+    fn parse_statement(&mut self) -> (Statement, bool) {
+        match &self.cur_token.Type as &str {
+            token::LET => return self.parse_let_statement(),
+            token::RETURN => return self.parse_return_statement(),
+            _ => return self.parse_expression_statement(),
+        }
     }
 
     fn parse_return_statement(&mut self) -> (Statement, bool) {
@@ -87,6 +87,29 @@ impl Parser {
             self.next_token();
         }
         return (stmt, true);
+    }
+
+    fn parse_expression_statement(&mut self) -> (Statement, bool) {
+        let stmt = ast::empty_statement();
+        // let mut stmt = Statement {
+        //     Token: self.cur_token.clone(),
+        //     Name: ast::empty_identifier(),
+        //     Value: Expression {},
+        // };
+        // if !self.expect_peek(token::IDENT) {
+        //     return (stmt, false);
+        // }
+        // stmt.Name = ast::Identifier {
+        //     Token: self.cur_token.clone(),
+        //     Value: self.cur_token.Literal.clone(),
+        // };
+        // if !self.expect_peek(token::ASSIGN) {
+        //     return (stmt, false);
+        // }
+        // while !self.cur_token_is(token::SEMICOLON) {
+        //     self.next_token();
+        // }
+        return (stmt, false);
     }
 
     fn peek_token_is(&self, t: &'static str) -> bool {

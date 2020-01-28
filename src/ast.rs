@@ -23,7 +23,7 @@ impl Statement {
         &self.Token.Literal
     }
     pub fn string(&self) -> String {
-        println!("{:#?}", self);
+        // println!("{:#?}", self);
         match &self.token_literal() as &str {
             token::LET => {
                 return format!(
@@ -74,12 +74,11 @@ impl Program {
         }
     }
 
-    fn string(&self) -> String {
+    pub fn string(&self) -> String {
         let mut out = Vec::new();
         for s in &self.Statements {
             out.push(s.string());
         }
-        println!("{}", out.concat());
         out.concat()
     }
 }

@@ -20,7 +20,7 @@ fn parser_test_let_statements() {
 }
 
 fn parser_test_let_statement(s: &Statement, t: &str) {
-    // println!("{:?}", s);
+    println!("{:?}", s);
     assert_eq!("let", s.token_literal());
     assert_eq!(t, s.Name.Value);
     assert_eq!(t, s.Name.token_literal());
@@ -56,7 +56,7 @@ fn parser_test_return_statements() {
 }
 
 fn parser_test_return_statement(s: &Statement, _t: &str) {
-    // println!("{:?}", s);
+    println!("{:?}", s);
     assert_eq!("return", s.token_literal());
     // assert_eq!(t, s.Name.Value);
     // assert_eq!(t, s.Name.token_literal());

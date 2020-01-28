@@ -50,12 +50,9 @@ pub const TRUE: &str = "true";
 pub const FALSE: &str = "false";
 pub const RETURN: &str = "return";
 
-// Null
-pub const NULL: &str = "null";
-
 pub fn empty_token() -> Token {
     Token {
-        Type: NULL.to_string(),
+        Type: "".to_string(),
         Literal: "".to_string(),
     }
 }

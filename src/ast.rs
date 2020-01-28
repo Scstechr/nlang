@@ -1,10 +1,13 @@
 use crate::token;
 
-#[derive(Debug)]
+#[derive(Debug, PartialEq)]
 pub struct Expression {}
 
 impl Expression {
     fn expression_node(&self) {}
+    pub fn string(&self) -> String {
+        "".to_string()
+    }
 }
 
 #[derive(Debug)]
@@ -18,6 +21,42 @@ impl Statement {
     fn statement_node(&self) {}
     pub fn token_literal(&self) -> &String {
         &self.Token.Literal
+    }
+    pub fn string(&self) -> String {
+        println!("{:#?}", self);
+        match &self.token_literal() as &str {
+            token::LET => {
+                return format!(
+                    "{t:?} {n:?} = {v:?};",
+                    t = self.token_literal(),
+                    n = self.Name.string(),
+                    v = self.Value,
+                )
+            }
+            token::RETURN => {
+                return format!("{t:?} {v:?};", t = self.token_literal(), v = self.Value,)
+            }
+            _ => {
+                return format!(
+                    "{t:?} {n:?} = {v:?};",
+                    t = self.token_literal(),
+                    n = self.Name.string(),
+                    v = self.Value,
+                )
+            }
+        }
+        // match self.token_literal()
+        // let out = if self.token_literal format!(
+        //     "{t:?} {n:?} = {v:?};",
+        //     t = self.token_literal(),
+        //     n = self.Name.string(),
+        //     v = self.Value,
+        // );
+        // // if self.Value != {} {
+        // //     concat!(out, self.Value.string());
+        // // }
+
+        // return out.to_string();
     }
 }
 
@@ -34,6 +73,15 @@ impl Program {
             "".to_string()
         }
     }
+
+    fn string(&self) -> String {
+        let mut out = Vec::new();
+        for s in &self.Statements {
+            out.push(s.string());
+        }
+        println!("{}", out.concat());
+        out.concat()
+    }
 }
 
 #[derive(Debug)]
@@ -47,12 +95,15 @@ impl Identifier {
     pub fn token_literal(&self) -> &String {
         &self.Token.Literal
     }
+    pub fn string(&self) -> String {
+        self.Value.clone()
+    }
 }
 
 pub fn empty_identifier() -> Identifier {
     Identifier {
         Token: token::empty_token(),
-        Value: "EMPTY".to_string(),
+        Value: "".to_string(),
     }
 }
 
@@ -74,5 +125,8 @@ impl ExpressionStatement {
     fn expression_node(&self) {}
     pub fn token_literal(&self) -> &String {
         &self.Token.Literal
+    }
+    pub fn string(&self) -> String {
+        format!("{}", self.Expression.string())
     }
 }
